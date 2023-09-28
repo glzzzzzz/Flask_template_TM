@@ -14,7 +14,9 @@ def register():
     if request.method == 'POST':
 
         # On récupère les champs 'username' et 'password' de la requête HTTP
-        username = request.form['username']
+        name = request.form['name']
+        first_name = request.form['first_name']
+        email = request.form['email']
         password = request.form['password']
 
         # On récupère la base de donnée
@@ -22,16 +24,16 @@ def register():
 
         # Si le nom d'utilisateur et le mot de passe ont bien une valeur
         # on essaie d'insérer l'utilisateur dans la base de données
-        if username and password:
+        if name and first_name and email and password:
             try:
-                db.execute("INSERT INTO users (username, password) VALUES (?, ?)",(username, generate_password_hash(password)))
+                db.execute("INSERT INTO user (name,first_name,email , password) VALUES (?, ?,?)",(name,first_name, generate_password_hash(password)))
                 # db.commit() permet de valider une modification de la base de données
                 db.commit()
             except db.IntegrityError:
 
                 # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
                 # dans le but de l'afficher ultérieurement, généralement sur la page suivante après une redirection
-                error = f"User {username} is already registered."
+                error = f"User {name + first_name} is already registered."
                 flash(error)
                 return redirect(url_for("auth.register"))
             
