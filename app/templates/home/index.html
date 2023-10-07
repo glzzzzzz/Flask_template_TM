@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1 id="title">{% block title %}Gérer vos animaux n'a jamais été aussi simple{% endblock %}</h1>
+  <div>
+    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux n'a jamais été aussi simple{% endblock %}</h1>
+    <a href={{url_for('auth.login')}} id="button" class="blue_font">Se connecter</a>
+  </div>
 {% endblock %}
 
 {% block content%}
-    <p>Ceci est un paragraphe de bienvenue.</p>
+    
 {% endblock %}
