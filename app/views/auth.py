@@ -97,6 +97,8 @@ def logout():
     return redirect("/")
 
 
+
+
 # Fonction automatiquement appelée à chaque requête (avant d'entrer dans la route) sur une route appartenant au blueprint 'auth_bp'
 # La fonction permet d'ajouter un attribut 'user' représentant l'utilisateur connecté dans l'objet 'g' 
 @auth_bp.before_app_request
