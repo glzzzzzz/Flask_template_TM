@@ -5,12 +5,19 @@
 
 
 body{
-    background: color #e1eaff;;
+    background-color:  #e1eaff;;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    height: 80vh;
+    
 }
 .navbar{
     overflow: hidden;
-    display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .navbar a{
     float: left;
@@ -20,10 +27,11 @@ body{
     text-decoration: none;
     padding: 14px 16px;
     color: black;
+    top
 }
 
 .navbar a.active{
-    color: #4948FF;
+    color:#4948ff;
     
 }
 
@@ -39,7 +47,6 @@ body{
   height: 53px;
   background: rgba(255,255,255,1);
   opacity: 1;
-  position: absolute;
   top: 0px;
   left: 0px;
   border: 1px solid rgba(11,6,255,1);
@@ -50,4 +57,30 @@ body{
   align-items: center;
   font-size: 16px;
 
+}
+
+.centered_container{
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-left: -10px;
+
+}
+.left_centered_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+.right_centered_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    
+
+    
 }

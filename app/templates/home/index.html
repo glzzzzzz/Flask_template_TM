@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <div>
-    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux n'a jamais été aussi simple{% endblock %}</h1>
+<div class="centered_container">
+  <div class="left_centered_container">
+    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux <br>n'a jamais été aussi simple.{% endblock %}</h1>
+    {% if g.user == None %}
     <a href={{url_for('auth.login')}} id="button" class="blue_font">Se connecter</a>
+    {% else %}
+    <a href={{url_for('pet.home_pet')}} id="button" classe="blue_font">Mes animaux</a>
+    {% endif %}
   </div>
+  <div class="right_centered_container">
+    <p class="white_box">n°1</p>
+    <img src="../images/chat_chien.png">
+    <p classe="white_box">n°2</p>
+  </div>
+</div>
 {% endblock %}
 
 {% block content%}

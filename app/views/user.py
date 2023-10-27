@@ -5,7 +5,7 @@ from app.utils import *
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 # Route /user/profile accessible uniquement à un utilisateur connecté grâce au décorateur @login_required
-@user_bp.route('/profile', methods=('GET', 'POST'))
+@user_bp.route('/myaccount', methods=('GET', 'POST'))
 @login_required 
 def show_profile():
     # Affichage de la page principale de l'application
