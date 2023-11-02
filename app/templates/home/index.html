@@ -3,7 +3,7 @@
 {% block header %}
 <div class="centered_container">
   <div class="left_centered_container">
-    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux <br>n'a jamais été aussi simple.{% endblock %}</h1>
+    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux <br>n'a jamais été aussi simple. {% endblock %}</h1>
     {% if g.user == None %}
     <a href={{url_for('auth.login')}} id="button" class="blue_font">Se connecter</a>
     {% else %}
@@ -11,9 +11,9 @@
     {% endif %}
   </div>
   <div class="right_centered_container">
-    <p class="white_box">n°1</p>
-    <img src="{{url_for('static', filename='chat_chien.png')}}" style="vertical-align:middle">
-    <p classe="white_box">n°2</p>
+      <p id="first_box" class="white_box">Vos rendez-vous vétérinaires, en un coup de patte: Recevez des notifications !</p>
+      <img src="{{url_for('static', filename='chat_chien.png')}}" style="vertical-align:middle" height="420">
+      <p id="second_box" class="white_box">Gardez un oeil sur le poids de votre animal : suivez son évolution rapidement.</p>
   </div>
 </div>
 {% endblock %}
