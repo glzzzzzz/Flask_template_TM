@@ -3,7 +3,7 @@
 {% block header %}
 <div class="centered_container">
   <div class="left_centered_container">
-    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux <br>n'a jamais été aussi simple. {% endblock %}</h1>
+    <h1 id="title" class="blue_font">{% block title %}Gérer vos animaux <br> n'a jamais été aussi simple. {% endblock %}</h1>
     {% if g.user == None %}
     <a href={{url_for('auth.login')}} id="button" class="blue_font">Se connecter</a>
     {% else %}

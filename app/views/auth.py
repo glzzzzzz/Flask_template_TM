@@ -29,6 +29,7 @@ def register():
                 db.execute("INSERT INTO user (name, email, phone_number,password) VALUES (?,?,?,?)",(name, email,phone_number, generate_password_hash(password)))
                 # db.commit() permet de valider une modification de la base de données
                 db.commit()
+                
             except db.IntegrityError:
 
                 # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
@@ -38,11 +39,12 @@ def register():
                 return redirect(url_for("auth.register"))
             
             return redirect(url_for("auth.login"))
+            
          
         else:
             error = "Username or password invalid"
             flash(error)
-            return redirect(url_for("auth.login"))
+            return redirect(url_for("auth.register"))
     else:
         # Si aucune donnée de formulaire n'est envoyée, on affiche le formulaire d'inscription
         return render_template('auth/register.html')

@@ -17,6 +17,8 @@ def apropos():
 @home_bp.route('/calculateur', methods =['GET', 'POST'])
 def calculateur():
     return render_template('home/calculateur.html')
+
+
 # Gestionnaire d'erreur 404 pour toutes les routes inconnues
 @home_bp.route('/<path:text>', methods=['GET', 'POST'])
 def not_found_error(text):

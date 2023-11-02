@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-    <title>{% block title %}{% endblock %} - Template de base Flask</title>
+    <title>{% block title %}{% endblock %} petcare.com</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
 </head>
@@ -12,7 +12,7 @@
         <a href={{url_for('pet.home_pet')}}>Mes animaux</a>
         <a href={{url_for('home.apropos')}}>À propos</a>
         <a href={{url_for('home.calculateur')}}>Calculateur de ration</a>
-        <a href={{url_for('user.show_profile')}}">Mon compte</a>
+        <a href={{url_for('user.show_profile')}}>Mon compte</a>
     </div>
 
     <section class="content">
