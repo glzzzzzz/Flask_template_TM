@@ -18,25 +18,30 @@ def register():
         email = request.form['email']
         phone_number = request.form['phone_number']
         password = request.form['password']
+        verify_password = request.form['verify_password']
 
         # On récupère la base de donnée
         db = get_db()
 
         # Si le nom d'utilisateur et le mot de passe ont bien une valeur
         # on essaie d'insérer l'utilisateur dans la base de données
-        if name and email and phone_number and password:
-            try:
-                db.execute("INSERT INTO user (name, email, phone_number,password) VALUES (?,?,?,?)",(name, email,phone_number, generate_password_hash(password)))
-                # db.commit() permet de valider une modification de la base de données
-                db.commit()
-                
-            except db.IntegrityError:
-
-                # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
-                # dans le but de l'afficher ultérieurement, généralement sur la page suivante après une redirection
-                error = f"User {name+email+password} is already registered."
-                flash(error)
+        if name and email and phone_number and password and verify_password:
+            if password != verify_password :
+                flash("Mot de passe pas identique")
                 return redirect(url_for("auth.register"))
+            else:
+                try:
+                    db.execute("INSERT INTO user (name, email, phone_number,password) VALUES (?,?,?,?)",(name, email,phone_number, generate_password_hash(password)))
+                    # db.commit() permet de valider une modification de la base de données
+                    db.commit()
+                    
+                except db.IntegrityError:
+
+                    # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
+                    # dans le but de l'afficher ultérieurement, généralement sur la page suivante après une redirection
+                    error = f"User {name+email+password} is already registered."
+                    flash(error)
+                    return redirect(url_for("auth.register"))
             
             return redirect(url_for("auth.login"))
             
@@ -94,7 +99,6 @@ def login():
 def logout():
     # Se déconnecter consiste simplement à supprimer le cookie session
     session.clear()
-
     # On redirige l'utilisateur vers la page principale une fois qu'il s'est déconnecté
     return redirect("/")
 

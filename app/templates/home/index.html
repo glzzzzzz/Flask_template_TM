@@ -7,7 +7,7 @@
     {% if g.user == None %}
     <a href={{url_for('auth.login')}} id="button" class="blue_font">Se connecter</a>
     {% else %}
-    <a href={{url_for('pet.home_pet')}} id="button" classe="blue_font">Mes animaux</a>
+    <a href={{url_for('pet.home_pet')}} id="button" class="blue_font">Mes animaux</a>
     {% endif %}
   </div>
   <div class="right_centered_container">

@@ -12,12 +12,17 @@
   <div class="login_box">
     <form method="post">
       <br><br><br>
-      <input type ="email"name="email" id="email" required>
+      <input type ="email"name="email" id="email" required placeholder="E-mail">
       <br><br><br>
-      <input type="password" name="password" id="password" required>
+  <div class="login_box" id="password_box">
+    <input type="password" name="password" id="password" required placeholder="Mot de passe">
+    <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon">
+  </div>
       <br><br><br>
       <input type="submit" value="Créer un compte">
     </form>
-    <a href="{{url_for('auth.register')}}">créer un compte</a>
+    <p class="ligne"></p>
+    <p class="gray_font">Vous n'avez pas de compte ?</p><a class="blue_font"href="{{url_for('auth.register')}}">Inscrivez-vous !</a>
+
   </div>
 {% endblock %}

@@ -1,19 +1,33 @@
-{% extends 'base.html' %}
+{% extends 'auth.html' %}
 
 {% block header %}
-  <h1>{% block title %}S'enregistrer{% endblock %}</h1>
+  <div class="login_box">
+    <h1 class="black_font">{% block title %}Créer votre compte{% endblock %}</h1>
+  </div>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="nsmr">Name</label>
-    <input name="name" id="name" required>
-    <label for="nsmr">E-mail</label>
-    <input type="email" name="email" id="email" required>
-    <label for="nsmr">Phone number</label>
-    <input type="text" name="phone_number" id="phone_number">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Register">
-  </form>
+  <div class="login_box">
+    <form method="post">
+      <br><br>
+      <input name="name" id="name" required placeholder="Nom">
+      <br><br>
+      <input type="email" name="email" id="email" required placeholder="E-mail">
+      <br><br>
+      <input type="text" name="phone_number" id="phone_number" required placeholder="Numéro de téléphone">
+      <br><br><br>
+    <div class="login_box" id="password_box">
+      <input type="password" name="password" id="password" required placeholder="Mot de passe">
+      <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon">
+    </div>
+      <br><br>
+    <div class="login_box" id="password_box">
+      <input type="password" name="verify_password" id="verify_password" required placeholder="Confirmez votre mot de passe">
+      <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon2">
+    </div>
+      <br><br>
+      <input type="submit" value="Register">
+    </form>
+  </div>
+  
 {% endblock %}

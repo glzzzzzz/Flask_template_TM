@@ -29,10 +29,19 @@ body{
     display: flex;
     height: 100%;
     flex-direction: column;
-    align-items: center;   
-    
+    align-items: center;      
 }
-
+#password_box{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+img{
+    position: absolute;
+    right: 25px;
+    width: 10%;
+    height: 70%;
+}
 .login_box form{
     display: flex;
     flex-direction: column;
@@ -42,18 +51,19 @@ body{
 .login_box input{
     width: 380px;
     height: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
     background-color: #ededed;
-    border-radius: 5px;
+    border-radius: 7px;
     border: solid #ededed;
     box-shadow: none ;
+    text-indent: 10px;
 }
 
-.login_box input[type="email"]:hover {
+.login_box input:hover {
     background-color: #d4d2d2;
   }
-.login_box input[type="password"]:hover {
-    background-color: #d4d2d2;
-  }
+
 
 
 .login_box input[type="submit"] {
@@ -64,7 +74,7 @@ body{
     text-align: center;
     display: inline-block;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 7px;
     cursor: pointer;
     box-shadow: none;
 }
@@ -72,6 +82,7 @@ body{
     background-color: #5c5cfa;
 
 }
+
 
 .black_font{
     font-family: 'Inter', sans-serif;
@@ -81,4 +92,18 @@ body{
     font-size: 15px;
     font-family: 'Inter', sans-serif;
     color: gray;
+}
+.blue_font {
+    text-decoration: none;
+    color:#4948FF;
+    font-family: 'Inter',sans-serif;
+}
+.blue_font:hover{
+    text-decoration: underline;
+}
+
+.ligne{
+    background-color: #d4d2d2;
+    width: 600px;
+    height: 1px;
 }

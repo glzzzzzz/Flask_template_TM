@@ -9,5 +9,6 @@
         <li>Email : {{g.user.email}}</li>
         <li>Password: {{g.user.password}}</li>
     </ul>
+    <a href="{{url_for('auth.logout')}}">Se déconnecter</a>
     
 {% endblock %}
