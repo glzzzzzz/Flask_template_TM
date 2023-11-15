@@ -1,4 +1,3 @@
-console.log("Script bien chargé")
 
 var currentUrl = window.location.href;
 

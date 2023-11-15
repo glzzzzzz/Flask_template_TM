@@ -1,3 +1,9 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .navbar{
     overflow: hidden;
     position: absolute;
@@ -19,11 +25,22 @@
     color:#4948ff;
     
 }
+
+p{
+    justify-content: flex-start;
+}
 body{
     display: flex;
     align-items: center;
     justify-content: center;
 
+}
+
+.flashed{
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    color: red;
+    text-align: center;
 }
 .login_box{
     display: flex;
@@ -39,6 +56,7 @@ body{
 img{
     position: absolute;
     right: 25px;
+    top: 15%;
     width: 10%;
     height: 70%;
 }

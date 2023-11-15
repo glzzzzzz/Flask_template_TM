@@ -29,6 +29,10 @@ def register():
             if password != verify_password :
                 flash("Mot de passe pas identique")
                 return redirect(url_for("auth.register"))
+            elif len(password) <= 8 :
+                flash("Veuillez entrer au minimum 8 charactères")
+                return redirect(url_for("auth.register")) 
+            
             else:
                 try:
                     db.execute("INSERT INTO user (name, email, phone_number,password) VALUES (?,?,?,?)",(name, email,phone_number, generate_password_hash(password)))
@@ -43,6 +47,7 @@ def register():
                     flash(error)
                     return redirect(url_for("auth.register"))
             
+            
             return redirect(url_for("auth.login"))
             
          
@@ -53,6 +58,7 @@ def register():
     else:
         # Si aucune donnée de formulaire n'est envoyée, on affiche le formulaire d'inscription
         return render_template('auth/register.html')
+
 
 # Route /auth/login
 @auth_bp.route('/login', methods=('GET', 'POST'))
