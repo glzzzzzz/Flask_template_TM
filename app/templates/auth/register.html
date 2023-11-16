@@ -10,18 +10,20 @@
   <div class="login_box">
     <form method="post">
       <p class="black_font">Informations personnelles</p>
-      <input name="name" id="name" required placeholder="Nom">
-      <br><br>
+      <input type="text" name="first_name" id="first_name" required placeholder="Prénom">
+      <br>
+      <input type="text" name="name" id="name" required placeholder="Nom">
+      <br>
       <input type="email" name="email" id="email" required placeholder="E-mail">
-      <br><br>
+      <br>
       <input type="text" name="phone_number" id="phone_number" required placeholder="Numéro de téléphone">
-      <br><br><br>
+      <br><br>
       <p class="black_font">Mot de passe</p>
     <div class="password_box" id="password_box">
       <input type="password" name="password" id="password" required placeholder="Minimum 8 charactères">
       <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon" class="eye_img" >
     </div>
-      <br><br>
+      <br>
     <div class="password_box" id="password_box">
       <input type="password" name="verify_password" id="verify_password" required placeholder="Confirmez votre mot de passe">
       <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon2" class="eye_img">

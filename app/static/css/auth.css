@@ -56,7 +56,7 @@ body{
     position: absolute;
     right: 25px;
     top: 15%;
-    width: 10%;
+    width: auto;
     height: 70%;
 }
 .login_box form{
@@ -143,22 +143,51 @@ body{
 .info_box{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;   
+    align-items: flex-start;  
+     
 }
+
 .info_box p{
+    font-family: 'Inter', sans-serif;
+    color: black;
+    font-size: 10px;
+}
+
+.info_box input{
     display: flex;
     align-items: center;
     border-radius: 5px;
-    width: fit-content;
+    width: 290px;
     height: 50px;
     font-size: 15px;
     background-color: #ededed;
+    border: solid #ededed;
     padding-left: 10px;
     padding-right:10px;   
 }
 .info_text{
     margin-left: 10px;
 }
+
+.name_and_first_name{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+}
+.name_and_first_name input{
+    width: 100px;
+    justify-content: space-between;
+}
+.first_name_column{
+    display: flex;
+    flex-direction: column;
+}
+.name_column{
+    display: flex;
+    flex-direction: column;
+    margin-left: 90px;
+}
+    
 
 
 .picture{
@@ -170,21 +199,21 @@ body{
 
 }
 
-.update_button input{
+.info_box #update{
     margin-top: 30px;
     background-color: #4948FF;
     border: #4948FF;
     font-family: 'Inter', sans-serif;
     color: white;
     text-align: center;
-    display: inline-block;
+    justify-content: center;
     font-size: 16px;
     border-radius: 7px;
     cursor: pointer;
     box-shadow: none;
 }
 
-.update_button input:hover{
+.info_box #update:hover{
     background-color: #5c5cfa;
 }
 #camera{

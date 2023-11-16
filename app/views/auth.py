@@ -14,6 +14,7 @@ def register():
     if request.method == 'POST':
 
         # On récupère les champs 'username' et 'password' de la requête HTTP
+        first_name = request.form['first_name']
         name = request.form['name']
         email = request.form['email']
         phone_number = request.form['phone_number']
@@ -25,17 +26,17 @@ def register():
 
         # Si le nom d'utilisateur et le mot de passe ont bien une valeur
         # on essaie d'insérer l'utilisateur dans la base de données
-        if name and email and phone_number and password and verify_password:
+        if first_name and name and email and phone_number and password and verify_password:
             if password != verify_password :
                 flash("Mot de passe pas identique")
                 return redirect(url_for("auth.register"))
-            elif len(password) <= 8 :
+            elif len(password) < 8 :
                 flash("Veuillez entrer au minimum 8 charactères")
                 return redirect(url_for("auth.register")) 
             
             else:
                 try:
-                    db.execute("INSERT INTO user (name, email, phone_number,password) VALUES (?,?,?,?)",(name, email,phone_number, generate_password_hash(password)))
+                    db.execute("INSERT INTO user (first_name, name, email, phone_number,password) VALUES (?,?,?,?,?)",(first_name, name, email,phone_number, generate_password_hash(password)))
                     # db.commit() permet de valider une modification de la base de données
                     db.commit()
                     
@@ -52,7 +53,7 @@ def register():
             
          
         else:
-            error = "Username or password invalid"
+            error = "Veuillez remplis tous les champs"
             flash(error)
             return redirect(url_for("auth.register"))
     else:
