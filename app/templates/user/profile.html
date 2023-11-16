@@ -1,14 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'auth.html' %}
 
 {% block header %}
-  <h1>{% block title %}Profil de l'utilisateur connecté {% endblock %}</h1>
+  <div class="top_info">
+    <div class="picture">
+      <img src="{{url_for('static', filename='camera.png')}}" id="camera">
+    </div>
+    <div class="top_content">
+      <h2 class="black_font">{% block title %}Mon compte{% endblock %}</h2>
+      <p class="gray_font">Ajouter une photo de profil</p>
+    </div> 
+  </div>
 {% endblock %}
 
 {% block content %}
-    <ul>
-        <li>Email : {{g.user.email}}</li>
-        <li>Password: {{g.user.password}}</li>
-    </ul>
-    <a href="{{url_for('auth.logout')}}">Se déconnecter</a>
+  <div class="info_box">
+    <p class="black_font " >Nom : {{g.user.name}}</p>
+    <p class="black_font ">Email : {{g.user.email}}</p>
+    <p class="black_font ">Numéro de téléphone : {{g.user.phone_number}}</p>
+    <div class="update_button">
+      <input type="submit" name="update" id="update" value="Changer mes informations">
+    </div>
     
+    <a href="{{url_for('auth.logout')}}" class="black_font">Se déconnecter</a>
+  </div>
 {% endblock %}

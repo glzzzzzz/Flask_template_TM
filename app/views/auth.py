@@ -88,6 +88,7 @@ def login():
         # S'il n'y pas d'erreur, on ajoute l'id de l'utilisateur dans une variable de session
         # De cette manière, à chaque requête de l'utilisateur, on pourra récupérer l'id dans le cookie session
         if error is None:
+            
             session.clear()
             session['user_id'] = user['id_user']
             # On redirige l'utilisateur vers la page principale une fois qu'il s'est connecté
@@ -110,7 +111,6 @@ def logout():
 
 
 
-
 # Fonction automatiquement appelée à chaque requête (avant d'entrer dans la route) sur une route appartenant au blueprint 'auth_bp'
 # La fonction permet d'ajouter un attribut 'user' représentant l'utilisateur connecté dans l'objet 'g' 
 @auth_bp.before_app_request
@@ -130,6 +130,7 @@ def load_logged_in_user():
          # On récupère la base de données et on récupère l'utilisateur correspondant à l'id stocké dans le cookie session
         db = get_db()
         g.user = db.execute('SELECT * FROM user WHERE id_user = ?', (user_id,)).fetchone()
+
 
 
 

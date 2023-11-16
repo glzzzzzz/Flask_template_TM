@@ -9,7 +9,6 @@
 {% block content %}
   <div class="login_box">
     <form method="post">
-      <br><br>
       <p class="black_font">Informations personnelles</p>
       <input name="name" id="name" required placeholder="Nom">
       <br><br>
@@ -20,12 +19,12 @@
       <p class="black_font">Mot de passe</p>
     <div class="password_box" id="password_box">
       <input type="password" name="password" id="password" required placeholder="Minimum 8 charactères">
-      <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon">
+      <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon" class="eye_img" >
     </div>
       <br><br>
     <div class="password_box" id="password_box">
       <input type="password" name="verify_password" id="verify_password" required placeholder="Confirmez votre mot de passe">
-      <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon2">
+      <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon2" class="eye_img">
     </div>
       <br><br>
       <input type="submit" value="Créer mon compte">

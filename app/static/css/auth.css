@@ -1,7 +1,7 @@
 body{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    
 }
 
 .navbar{
@@ -18,11 +18,10 @@ body{
     text-decoration: none;
     padding: 14px 16px;
     color: black;
-    top
 }
 
 .navbar a.active{
-    color:#4948ff;
+    color: #4948FF;
     
 }
 
@@ -53,7 +52,7 @@ body{
     display: flex;
     flex-direction: row;
 }
-img{
+.eye_img{
     position: absolute;
     right: 25px;
     top: 15%;
@@ -124,4 +123,71 @@ img{
     background-color: #d4d2d2;
     width: 600px;
     height: 1px;
+}
+
+.top_info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 65vw;
+    
+}
+
+.top_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;  
+}
+
+.info_box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   
+}
+.info_box p{
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    width: fit-content;
+    height: 50px;
+    font-size: 15px;
+    background-color: #ededed;
+    padding-left: 10px;
+    padding-right:10px;   
+}
+.info_text{
+    margin-left: 10px;
+}
+
+
+.picture{
+    height: 35px;
+    width: 35px;
+    background-color: #edf0ee;
+    border-radius: 50%;
+    padding: 10px;
+
+}
+
+.update_button input{
+    margin-top: 30px;
+    background-color: #4948FF;
+    border: #4948FF;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.update_button input:hover{
+    background-color: #5c5cfa;
+}
+#camera{
+    width: 35px;
+    height: auto;
 }

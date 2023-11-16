@@ -8,6 +8,10 @@
 <body>
     <div class="navbar">
         <a href={{url_for('home.landing_page')}}>Accueil</a>
+        <a href={{url_for('pet.home_pet')}}>Mes animaux</a>
+        <a href={{url_for('home.apropos')}}>À propos</a>
+        <a href={{url_for('home.calculateur')}}>Calculateur de ration</a>
+        <a href={{url_for('user.show_profile')}}>Mon compte</a>
     </div>
 
     <section class="content">
@@ -22,4 +26,4 @@
         {% block content %}{% endblock %}
     </section>
 
-    <script type="text/javascript" src="{{url_for('static', filename='js/show_hide_password.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>

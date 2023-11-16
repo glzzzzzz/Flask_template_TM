@@ -30,6 +30,7 @@ body{
     position: absolute;
     top: 0;
     right: 0;
+    left: auto;
 }
 .navbar a{
     float: left;
