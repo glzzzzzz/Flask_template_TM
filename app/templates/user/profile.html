@@ -14,7 +14,7 @@
 
 {% block content %}
   <div class="info_box">
-    <form method="POST">
+    <form method="POST" action="{{url_for('user.update_profile')}}">
       <div class="name_and_first_name">
         <div class="first_name_column">
           <p>Prénom</p>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <p>E-mail</p>
-      <input type="emailt" name="email" id="email" class="gray_font" value="{{g.user.email}}">
+      <input type="email" name="email" id="email" class="gray_font" value="{{g.user.email}}">
       <br>
       <p>Numéro de téléphone</p>
           <input type="text" name="phone_number" id="phone_number" class="gray_font" value="{{g.user.phone_number}}">
@@ -41,7 +41,7 @@
         <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon2" class="eye_img">
         <br>
       </div>
-      <input type="submit" id="update"value="Créer mon compte">
+      <input type="submit" id="update" value="Modifier mes informations">
     </form>
   </div>
 {% endblock %}

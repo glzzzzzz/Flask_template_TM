@@ -119,6 +119,7 @@ def load_logged_in_user():
 
     # On récupère l'id de l'utilisateur stocké dans le cookie session
     user_id = session.get('user_id')
+    
 
     # Si l'id de l'utilisateur dans le cookie session est nul, cela signifie que l'utilisateur n'est pas connecté
     # On met donc l'attribut 'user' de l'objet 'g' à None
@@ -131,6 +132,7 @@ def load_logged_in_user():
          # On récupère la base de données et on récupère l'utilisateur correspondant à l'id stocké dans le cookie session
         db = get_db()
         g.user = db.execute('SELECT * FROM user WHERE id_user = ?', (user_id,)).fetchone()
+
 
 
 
