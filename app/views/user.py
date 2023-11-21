@@ -1,6 +1,7 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from app.utils import *
 from app.db.db import get_db
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # Routes /user/...
 user_bp = Blueprint('user', __name__, url_prefix='/user')
@@ -76,10 +77,27 @@ def update_profile():
                     error = f"Une erreur a eu lieu, veuillez réessayer !"
                     flash(error)
                     return render_template('user/profile.html')
-       
+        if new_password == new_verify_password and len(new_password)>= 8:
+            if not check_password_hash(user['password'], new_password):
+                try:
+                    db.execute("UPDATE user SET password = ? WHERE id_user = ?",(generate_password_hash(new_password),user_id))
+                    db.commit()
+                    flash('Changement de mot de passe effectué')
+                    flash(f"ancien hash :{user['password']}")
+                except db.IntegrityError:
+                    error = f"Une erreur a eu lieu, veuillez réessayer !"
+                    flash(error)
+                    return render_template('user/profile.html')
+            else:
+                flash('Votre nouveau mot de passe ne doit pas être identique avec le précédent')
+        else:
+            error = f"Veuillez entrer des mots de passe identiques avec un minimum de 8 charactères !"
+            flash(error)
+            return render_template('user/profile.html')
+        
         db = get_db()
         g.user = db.execute('SELECT * FROM user WHERE id_user = ?', (user_id,)).fetchone()
-      
+        flash(user['password'])
 
         return render_template('user/profile.html')
 

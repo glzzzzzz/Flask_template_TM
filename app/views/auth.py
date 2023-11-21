@@ -77,7 +77,6 @@ def login():
         # On récupère l'utilisateur avec le username spécifié (une contrainte dans la db indique que le nom d'utilisateur est unique)
         # La virgule après username est utilisée pour créer un tuple contenant une valeur unique
         user = db.execute('SELECT * FROM user WHERE email = ?', (email,)).fetchone()
-
         # Si aucun utilisateur n'est trouve ou si le mot de passe est incorrect
         # on crée une variable error 
         error = None

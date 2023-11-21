@@ -31,13 +31,14 @@
       <p>Numéro de téléphone</p>
           <input type="text" name="phone_number" id="phone_number" class="gray_font" value="{{g.user.phone_number}}">
       <br>
+      <p>Changez mon mot de passe</p>
       <div class="password_box" id="password_box">
-        <input type="password" name="password" class="gray_font" id="password" placeholder="Optionel">
+        <input type="password" name="password" class="gray_font" id="password" value="{{g.user.password}}">
         <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon" class="eye_img" >
       </div>
         <br>
       <div class="password_box" id="password_box">
-        <input type="password" name="verify_password" id="verify_password" class="gray_font" placeholder="Optionel">
+        <input type="password" name="verify_password" id="verify_password" class="gray_font" value="{{g.user.password}}">
         <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon2" class="eye_img">
         <br>
       </div>
