@@ -37,7 +37,7 @@ body{
 
 .flashed{
     font-family: 'Inter', sans-serif;
-    font-weight: 200;
+    font-weight:lighter;
     color: red;
     text-align: center;
 }

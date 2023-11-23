@@ -10,6 +10,8 @@ for (var i=0 ; i<nav_links.length;i++) {
     if (current_page === linkUrl){
         link.classList.add('active');
     }
+
+    
 }
 
 

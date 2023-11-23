@@ -1,6 +1,28 @@
 {% extends 'base.html'%}
 {%block content%}
-    <div>
-        <p>test</p>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/calculateur.css')}}">    
+    <div class="custom_select">
+        <form action="{{url_for('pet.cat_bee')}}" method="POST">
+            <input type="text" name="weight" placeholder="kg">
+            <select name="status_cat" >
+                <option value="None">-Statut de mon chat-</option>
+                <option value="sterilized" >Stérilisé</option>
+                <option value="not_sterilized" >Non stérilisé</option>
+            </select>
+            <select name="physical_activity">
+                <option value="None">-Situation physique de mon chat-</option>
+                <option value="inactive">Inactif</option>
+                <option value="not_very_active">Peu actif</option>
+                <option value="normal">Activité normale</option>
+                <option value="active">Actif</option>
+                <option value="very_active">Très actif</option>
+            </select>
+            <input type="submit" name="submit" placeholder="Calculez la ration">
+        </form>
+        {% if cat_bee is not none %}
+            <p class="bee_final">{{cat_bee}} kcal/jour</p>
+        {% else %}
+            <p class="bee_final" id="start_value">résultat en kcal/jour</p>
+        {% endif %}
     </div>
 {%endblock%}
