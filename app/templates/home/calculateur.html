@@ -7,20 +7,20 @@
             <h2 class="blue_text">1. Sélectionnez votre type d'animal : </h2>
             <p class ="black_text">Commencez par choisir si vous calculez le BEE pour un chat ou un chien.<br>Chaque espèce a des besoins énergétiques différents.</p>
             <h2 class="blue_text">2. Fournissez les détails de votre animal : </h2>
-            <p class ="black_text">Indiquez des informations telles que la taille, le poids, l'âge, et le niveau d'activité<br>physique de votre animal. Ces facteurs influencent considérablement son BEE.</p>
+            <p class ="black_text">Indiquez des informations telles que le poids, le statut sexuel et le niveau d'activité<br>physique de votre animal. Ces facteurs influencent considérablement son BEE.</p>
             <h2 class="blue_text">3. Obtenez le BEE de votre animal :</h2> 
             <p class ="black_text">Une fois que vous avez fourni toutes les informations requises, le calculateur<br>déterminera le BEE de votre animal. C'est la quantité minimale d'énergie dont il a<br>besoin pour maintenir un poids santé.</p>
         </div>
         <div class="right_centered_text">
             <div class="img_container">
                 <a href="{{url_for('pet.dog_bee')}}">
-                    <img src="{{url_for('static', filename='dog.png')}} " alt="Image de chien" height="150">
+                    <img src="{{url_for('static', filename='dog.png')}} " alt="Image de chien" id="dog">
                 </a>
                 <a href="{{url_for('pet.cat_bee')}}">
-                    <img src="{{url_for('static', filename='cat.png')}}" alt="Image de chat" height="150">
+                    <img src="{{url_for('static', filename='cat.png')}}" alt="Image de chat"id="cat">
                 </a>
             </div>
-            <p class="black_text">Le BEE de votre animal est calculé en utilisant une équation spécifique<br>prenant en compte des facteurs tels que son poids, son niveau<br>d'activité, son âge, et son sexe. Cette équation détermine la quantité<br>minimale d'énergie quotidienne nécessaire à votre animal pour se<br>maintenir dans des conditions normales.</p>
+            <p class="black_text">
         </div>
     </div>
 

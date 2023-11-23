@@ -2,6 +2,7 @@
 {%block content%}
     <link rel="stylesheet" href="{{url_for('static', filename='css/calculateur.css')}}">    
     <div class="custom_select">
+        <img src="{{url_for('static', filename='cat.png')}}" alt="Image de chat">
         <form action="{{url_for('pet.cat_bee')}}" method="POST">
             <input type="text" name="weight" placeholder="kg">
             <select name="status_cat" >

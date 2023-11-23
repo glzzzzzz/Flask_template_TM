@@ -15,8 +15,16 @@
     justify-content: center;
     padding-right: 20px;
 }
+.main_container #cat{
+    height: 35vh;
+}
+.main_container #cat:hover{
+    height: 40vh;
+}
 
-
+.main_container #dog{
+    height:35vh;
+}
 .black_text{
     font-family: 'Inter', sans-serif;
     color: black;
@@ -93,4 +101,13 @@
     font-family: 'Inter', sans-serif;
     margin-left: 2%;
     white-space: nowrap;
+}
+
+.custom_select img{
+    filter: drop-shadow(0px 1000px 0 #e1eaff);
+    transform: translateY(-1000px);
+    position: absolute;
+    height: 30vh;
+    top:0;
+    left:0;
 }
