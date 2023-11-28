@@ -52,8 +52,8 @@ body{
     font-family: 'Inter', sans-serif;
     color: #4948FF;
     text-decoration: none;
-  
 }
+
 #title{
     font-size: 35px;
 }  
@@ -130,4 +130,24 @@ body{
     width: 170px;
     right: 0;
     bottom: 0;
+}
+
+.text_content{
+    display: flex;
+    overflow-y: scroll;
+    text-align: center;
+    padding-top: 500px;
+    
+}
+.text_content h1{
+    margin-bottom: 100px;
+}
+.text_content .blue_background{
+    padding: 50px;
+    width: 100vw;
+    margin-bottom: 100px;
+    background-color: #4948FF;
+    font-family: 'Inter', sans-serif;
+    color: #e1eaff;
+    text-decoration: none;
 }
