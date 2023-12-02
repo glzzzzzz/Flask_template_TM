@@ -10,17 +10,18 @@
 
 {% block content %}
   <div class="login_box">
-    <form method="post">
+    <form method="POST">
       <br><br><br>
       <input type ="email"name="email" id="email" required placeholder="E-mail">
       <br><br><br>
-  <div class="login_box" id="password_box">
-    <input type="password" name="password" id="password" required placeholder="Mot de passe">
-    <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon" class="eye_img">
-  </div>
-      <br><br><br>
-      <input type="submit" value="Créer un compte">
-    </form>
+      <div class="login_box" id="password_box">
+        <input type="password" name="password" id="password" required placeholder="Mot de passe">
+        <img src="{{url_for('static', filename='eye-close.png')}}" id="eyeicon" class="eye_img">
+      </div>
+      <br><br>
+      <a href="{{url_for('auth.forgot_password')}}" class="blue_font">J'ai oublié mon mot de passe !</a>
+      <br>
+      <input type="submit" value="Se connecter">
     <p class="ligne"></p>
     <p class="gray_font">Vous n'avez pas de compte ?</p><a class="blue_font"href="{{url_for('auth.register')}}">Inscrivez-vous !</a>
 

@@ -47,7 +47,8 @@ body{
     flex-direction: column;
     align-items: center;      
 }
-#password_box{
+#password_box1,
+#password_box2{
     position: relative;
     display: flex;
     flex-direction: row;

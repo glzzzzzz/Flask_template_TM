@@ -83,7 +83,6 @@ def update_profile():
                     db.execute("UPDATE user SET password = ? WHERE id_user = ?",(generate_password_hash(new_password),user_id))
                     db.commit()
                     flash('Changement de mot de passe effectué')
-                    flash(f"ancien hash :{user['password']}")
                 except db.IntegrityError:
                     error = f"Une erreur a eu lieu, veuillez réessayer !"
                     flash(error)
