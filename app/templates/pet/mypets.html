@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Mes animaux</h1>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/calculateur.css')}}">
+    <div class="main_container">
+        {{ for pet in list_pet}}
+        <div class="list_pets">
+            <p>{{pet}}</p>
+        </div>
+        {{endfor}}
+        <div class="info_pet">
+            <p>info_pet</p>
+        </div>
+
+    </div>
+    
 
 {% endblock %}

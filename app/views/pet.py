@@ -5,7 +5,27 @@ pet_bp = Blueprint('pet', __name__, url_prefix='/pet')
 
 @pet_bp.route('/mesanimaux',methods=['GET','POST'])
 def home_pet():
-    return render_template('pet/mypets.html')
+    
+    return render_template('pet/mypets.html', list_pet)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,7 +126,7 @@ def dog_bee():
             return render_template('pet/dog_bee.html',dog_bee=None)
         else:
             
-            dog_bee = round((60*float(weight)*physical_activity*status_dog*race), 2)
+            dog_bee = round((130*float(weight)*physical_activity*status_dog*race), 2)
             
     
     return render_template('pet/dog_bee.html', dog_bee=dog_bee)
