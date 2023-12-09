@@ -10,7 +10,7 @@
                 <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
             </div>
             {% for pet in list_pet%}
-                <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}">
+            <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}">
                     <p class="black_text">{{pet['name']}}</p>
                 </a>
                 <p class="black_text">{{pet['chip_number']}}</p>
@@ -26,8 +26,10 @@
         {% endif%}
         <div class="info_pet">
             <p>info_pet</p>
-           
-
+            <p>{{pet_details['name']}}</p>
+            <p>{{pet_details['breed']}}</p>
+            <p>{{pet_details['date_birth']}}</p>
+            <p>{{pet_details['chip_number']}}</p>
         </div>
 
     </div>

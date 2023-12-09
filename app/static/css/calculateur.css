@@ -5,7 +5,7 @@
     justify-content: space-evenly;
     align-items: center;
 }
-.main_container img{
+.img_container img{
     filter: drop-shadow(0px 1000px 0 #4948FF);
     transform: translateY(-1000px);
 }
@@ -19,14 +19,14 @@
     padding-left: 100px;
 }
 
-.main_container #cat{
+.img_container #cat{
     height: 35vh;
 }
-.main_container #cat:hover{
+.img_container #cat:hover{
     height: 40vh;
 }
 
-.main_container #dog{
+.img_container #dog{
     height:35vh;
 }
 .black_text{
@@ -129,4 +129,14 @@
     border-radius: 7px;
     width: 72%;
     height: 80vh;
+}
+
+.list_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.list_title img{
+    height: 5vh;
 }
