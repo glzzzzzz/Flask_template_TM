@@ -14,17 +14,19 @@ def home_pet():
         return render_template('auth/login.html')
 
 
-@pet_bp.route('/mesanimaux/<chip_number>')
+@pet_bp.route('/mesanimaux/<chip_number>', methods=['GET','POST'])
 def pet_details(chip_number):
     if chip_number:
         db = get_db()
         list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
         pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
         return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
-    else :
-        return render_template('pet/mypets.html')
+    #else :
+    return render_template('pet/mypets.html')
 
-
+@pet_bp.route('/mesanimaux/nouvel_animal')
+def new_pet(methods=['GET','POST']):
+    return render_template('pet/add_new_pet.html')
 
 
 

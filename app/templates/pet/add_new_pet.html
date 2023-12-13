@@ -3,14 +3,14 @@
 {% block content %}
     <link rel="stylesheet" href="{{url_for('static', filename='css/calculateur.css')}}">
     <div class="main_container">
-        {% if list_pet %}
+        {% if list_pet != none%}
         <div class="list_pets">
             <div class="list_title">
                 <p class="black_text">Vos animaux</p>
                 <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
             </div>
             {% for pet in list_pet%}
-                {%if pet['chip_number'] is not None %}
+                {%if pet['chip_number'] is not None%}
                     <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}">
                         <p class="black_text">{{pet['name']}}</p>
                     </a>
@@ -19,7 +19,6 @@
                     <p>Vous n'avez pas d'animaux enregistrés</p>
                 {% endif %}
             {% endfor %}
-            
         </div>
         {% else %}
         <div class="list_pets">
@@ -33,8 +32,15 @@
         {% endif%}
         <div class="info_pet">
             <p>info_pet</p>
-           
-
+            <div class="info_pet">
+                <form action="POST">
+                    <input type="text" name="name_pet"id="name_pet" placeholder="Nom de votre animal">
+                    <input type="text" name="chip_number" id="chip_number" placeholder="Numéro de puce">
+                    <input type="text" name="breed" id="breed" placeholder="Race de votre animal">
+                    <input type="text" name="date_birth" id="date_birthe" placeholder="Date de naissance">
+                    <input type="submit" value="Valider les changements">
+                </form>
+            </div>
         </div>
 
     </div>
