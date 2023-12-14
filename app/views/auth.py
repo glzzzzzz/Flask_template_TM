@@ -12,7 +12,7 @@ import string
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 # Route /auth/register
-@auth_bp.route('/register', methods=('GET', 'POST'))
+@auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
 
     # Si des données de formulaire sont envoyées vers la route /register (ce qui est le cas lorsque le formulaire d'inscription est envoyé)
@@ -68,7 +68,7 @@ def register():
 
 
 # Route /auth/login
-@auth_bp.route('/login', methods=('GET', 'POST'))
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     # Si des données de formulaire sont envoyées vers la route /login (ce qui est le cas lorsque le formulaire de login est envoyé)
     if request.method == 'POST':
@@ -120,20 +120,21 @@ def forgot_password():
     if request.method == 'POST':
         email = request.form['email']
         db = get_db()
-        id_user = db.execute("SELECT id_user FROM user WHERE email = ?",(email,)).fetchone()[0]
-        if id_user:
-            
+        try :
+            id_user = db.execute("SELECT id_user FROM user WHERE email = ?",(email,)).fetchone()[0]
             db.execute("DELETE FROM token WHERE id_user_token = ?",(id_user,))
             token = ''.join(random.choices(string.ascii_letters + string.digits, k = 30))
             #date_exacte d'aujourd'hui + 5 minutes
             time = datetime.utcnow() + timedelta(minutes=5)
             #timestamp() -> time en nb float
             db.execute("INSERT INTO token (token, date_expire,id_user_token) values (?,?,?)",(token,time.timestamp(), id_user))
-            
-            
             db.execute("DELETE FROM token WHERE date_expire > ?", (time.timestamp(),))
             db.commit()
             return render_template('auth/reset_password.html')
+        except :
+            flash("Cet utilisateur n'existe pas.")
+            render_template('auth/forgot_password.html')
+        
     else:
         return render_template('auth/forgot_password.html')
 

@@ -16,17 +16,56 @@ def home_pet():
 
 @pet_bp.route('/mesanimaux/<chip_number>', methods=['GET','POST'])
 def pet_details(chip_number):
-    if chip_number:
-        db = get_db()
-        list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
-        pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
-        return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
-    #else :
-    return render_template('pet/mypets.html')
+    db = get_db()
+    list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+    pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+    if request.method == 'POST':
+        flash('atteint')
+        user_id = session['user_id']
+        new_name = request.form['name_pet']
+        new_breed = request. form['breed']
+        new_chip_number = request.form['chip_number']
+        new_date_birth = request.form['date_birth']
+        
+        if new_name != pet_details['name']:
+            try:
+                
+                db.execute('UPDATE pet SET name = ? WHERE chip_number = ?',(new_name, chip_number,))
+                db.commit()
+                list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+                pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+                db.close()
+                return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
+            except db.IntegrityError:
 
-@pet_bp.route('/mesanimaux/nouvel_animal')
-def new_pet(methods=['GET','POST']):
-    return render_template('pet/add_new_pet.html')
+                    error = f"Une erreur a eu lieu, veuillez réessayer !"
+                    flash(error)
+                    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
+
+    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
+
+@pet_bp.route('/mesanimaux/nouvel_animal', methods=['GET','POST'])
+def new_pet():
+    db = get_db()
+    list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+    if request.method == 'POST':
+        name_pet = request.form['name_pet']
+        chip_number = request.form['chip_number']
+        breed = request.form['breed']
+        date_birth = request.form['date_birth']
+        user_id = session['user_id']
+        try:
+            db.execute("INSERT INTO pet (chip_number,owner_id, name, breed, date_birth) VALUES (?,?,?,?,?)",(chip_number,user_id, name_pet,breed, date_birth,))
+            db.commit()
+            db.close()
+            flash('Vous avez ajouté un nouvel animal.')
+            return redirect(url_for('pet.home_pet', list_pet = list_pet))
+        except db.IntegrityError:
+            flash('Une erreur à eu lieu, veuillez réessayer.')
+            return render_template('pet/add_new_pet.html', list_pet = list_pet)
+        
+    else:
+        return render_template('pet/add_new_pet.html', list_pet = list_pet)
 
 
 

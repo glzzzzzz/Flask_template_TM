@@ -125,10 +125,47 @@
 }
 
 .info_pet{
+    display: flex;
+    align-items: center;
     background-color: white;
     border-radius: 7px;
     width: 72%;
     height: 80vh;
+}
+
+.info_left{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    margin-left: 2%;
+}
+.info_left form{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5%;
+    
+    
+    
+}
+
+.info_left input{
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgb(168, 168, 168);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+}
+.info_left input[type='submit']{
+    border: none;
+    background-color: #4948FF;
+    color: white;
 }
 
 .list_title{
@@ -140,4 +177,5 @@
 .list_title img{
     height: 5vh;
 }
+
 

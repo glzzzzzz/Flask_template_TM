@@ -7,10 +7,12 @@
         <div class="list_pets">
             <div class="list_title">
                 <p class="black_text">Vos animaux</p>
-                <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
+                <a href="{{url_for('pet.new_pet')}}">
+                    <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
+                </a>
             </div>
             {% for pet in list_pet%}
-                {%if pet['chip_number'] is not None %}
+                {%if pet['chip_number'] %}
                     <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}">
                         <p class="black_text">{{pet['name']}}</p>
                     </a>
