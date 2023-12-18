@@ -116,7 +116,6 @@
     left:0;
 }
 
-
 .list_pets{
     background-color: white;
     border-radius: 7px;
@@ -127,10 +126,21 @@
 .info_pet{
     display: flex;
     align-items: center;
+    justify-content: space-around;
     background-color: white;
     border-radius: 7px;
     width: 72%;
     height: 80vh;
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.title img{
+    height: 5vh;
 }
 
 .info_left{
@@ -160,7 +170,7 @@
     width: fit-content;
     padding: 8px;
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    font-size: 10px;
 }
 .info_left input[type='submit']{
     border: none;
@@ -168,14 +178,33 @@
     color: white;
 }
 
-.list_title{
+
+.info_right input{
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-}
-.list_title img{
-    height: 5vh;
+    border: 2px solid rgb(168, 168, 168);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
 }
 
+.info_vaccine{
+    display: flex;
+    flex-direction: column;
+}
 
+.info_vaccine form{
+    display: flex;
+    flex-direction: column;
+}
+
+.info_vaccine input{
+    padding: 4px;
+    margin-top: 3px;
+}
+.info_vaccine label{
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+}

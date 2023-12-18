@@ -5,7 +5,7 @@
     <div class="main_container">
         {% if list_pet %}
         <div class="list_pets">
-            <div class="list_title">
+            <div class="title">
                 <p class="black_text">Vos animaux</p>
                 <a href="{{url_for('pet.new_pet')}}">
                     <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
@@ -25,7 +25,7 @@
         </div>
         {% else %}
         <div class="list_pets">
-            <div class="list_title">
+            <div class="title">
                 <p class="black_text">Aucun animal enregistré</p>
                 <a href="{{url_for('pet.new_pet')}}">
                     <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">

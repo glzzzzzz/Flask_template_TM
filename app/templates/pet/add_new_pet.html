@@ -5,7 +5,7 @@
     <div class="main_container">
         {% if list_pet %}
         <div class="list_pets">
-            <div class="list_title">
+            <div class="title">
                 <p class="black_text">Vos animaux</p>
                 <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
             </div>
@@ -22,7 +22,7 @@
         </div>
         {% else %}
         <div class="list_pets">
-            <div class="list_title">
+            <div class="title">
                 <p class="black_text">Aucun animal enregistré</p>
                 <a href="{{url_for('pet.new_pet')}}">
                     <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
@@ -31,14 +31,16 @@
         </div>
         {% endif%}
         <div class="info_pet">
-            <p>Ajouter un nouvel animal</p>
-            <form method="POST">
-                <input type="text" name="name_pet"id="name_pet" placeholder="Nom de votre animal">
-                <input type="text" name="chip_number" id="chip_number" placeholder="Numéro de puce">
-                <input type="text" name="breed" id="breed" placeholder="Race de votre animal">
-                <input type="text" name="date_birth" id="date_birth" placeholder="Date de naissance">
-                <input type="submit" value="Ajouter mon animal">
-            </form>
+            <div class="info_left">
+                <p class="black_text">Ajouter un nouvel animal</p>
+                <form method="POST">
+                    <input type="text" name="name_pet"id="name_pet" placeholder="Nom de votre animal">
+                    <input type="text" name="chip_number" id="chip_number" placeholder="Numéro de puce">
+                    <input type="text" name="breed" id="breed" placeholder="Race de votre animal">
+                    <input type="text" name="date_birth" id="date_birth" placeholder="Date de naissance">
+                    <input type="submit" value="Ajouter mon animal">
+                    </form>
+            </div>
         </div>
 
     </div>

@@ -44,29 +44,24 @@
                 </form>
             </div>  
             <div class="info_right">
-                {% if list_vaccine %}
+                <div class="info_vaccine">
                     <div class="title">
-                        <p class="black_text">Vaccins</p>
+                        <p class="black_text">Ajout d'un vaccin</p>
                         <a href="{{url_for('pet.new_vaccine')}}">
                             <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
                         </a>
-                        {% for vaccine in list_vaccine%}
-                            <p>{{vaccine['date_meeting']}}</p>
-                            <p>{{vaccine['name']}}</p>
-                        {% endfor %}
                     </div>
-                {% else %}
-                    <div class="title">
-                        <p class="black_text">Ajouter un vaccin</p>
-                        <a href="{{url_for('pet.new_vaccine')}}">
-                            <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
-                        </a>
-                        
-                    </div>
-                {% endif %}
-
-
-
+                    <form method="POST">
+                        <label for="date_meeting">Date du vaccin :
+                            <input type="date" min="{{min_date}}" name="date_meeting" id="date_meeting">
+                        </label>
+                        <input type="text" name="reason_vaccine" id="reason_vaccine" placeholder="Indiquez la raison du vaccin">
+                        <label for="vaccin_reminder">Date du rappel du vaccin :
+                            <input type="date" min="{{min_date}}" name="vaccine_reminder" id="vaccine_reminder">
+                        </label>
+                        <input type="submit" value="Ajouter le vaccin">
+                    </form>
+                </div>
             </div>  
         </div>
 

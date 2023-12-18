@@ -1,5 +1,9 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from app.db.db import get_db
+from flask_wtf import FlaskForm
+from datetime import datetime
+
+
 pet_bp = Blueprint('pet', __name__, url_prefix='/pet')
 
 
@@ -17,32 +21,42 @@ def home_pet():
 @pet_bp.route('/mesanimaux/<chip_number>', methods=['GET','POST'])
 def pet_details(chip_number):
     db = get_db()
+    session.pop('chip_number', None)
+    session['chip_number'] = chip_number
+    
     list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
     pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+    list_vaccine = db.execute('SELECT * FROM vaccine WHERE pet_chip_number = ?',(chip_number,)).fetchall()
     if request.method == 'POST':
-        flash('atteint')
         user_id = session['user_id']
         new_name = request.form['name_pet']
         new_breed = request. form['breed']
         new_chip_number = request.form['chip_number']
         new_date_birth = request.form['date_birth']
         
-        if new_name != pet_details['name']:
-            try:
-                
-                db.execute('UPDATE pet SET name = ? WHERE chip_number = ?',(new_name, chip_number,))
+        try:
+            if new_chip_number and new_chip_number != pet_details['chip_number']:
+                db.execute('UPDATE pet SET chip_number = ? WHERE  chip_number = ?', (new_chip_number, chip_number,))
                 db.commit()
-                list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
-                pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
-                db.close()
-                return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
-            except db.IntegrityError:
-
-                    error = f"Une erreur a eu lieu, veuillez réessayer !"
-                    flash(error)
-                    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
-
-    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet)
+            if new_name and new_name != pet_details['name']:
+                db.execute('UPDATE pet SET name = ? WHERE chip_number = ?', (new_name, chip_number,))
+                db.commit()
+            if new_breed and new_breed != pet_details['breed']:
+                db.execute('UPDATE pet SET breed = ? WHERE chip_number = ?', (new_breed, chip_number,))
+                db.commit()
+            if new_date_birth and new_date_birth != pet_details['date_birth']:
+                db.execute('UPDATE pet SET date_birth = ? WHERE chip_number = ?', (new_date_birth, chip_number,))
+                db.commit()
+        except db.IntegrityError:
+                error = f"Une erreur a eu lieu, veuillez réessayer !"
+                flash(error)
+                return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine)
+        
+        list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+        pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+        
+    db.close()
+    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine)
 
 @pet_bp.route('/mesanimaux/nouvel_animal', methods=['GET','POST'])
 def new_pet():
@@ -67,12 +81,27 @@ def new_pet():
     else:
         return render_template('pet/add_new_pet.html', list_pet = list_pet)
 
-
-
-
-
-
-
+@pet_bp.route('/mesanimaux/nouveau_vaccin', methods = ['GET', 'POST'])
+def new_vaccine():
+    db = get_db()
+    chip_number = session['chip_number']
+    today_date = datetime.now()
+    min_date = today_date.strftime('%Y-%m-%d')
+    list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+    pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+    if request.method =='POST':
+        date_meeting = request.form['date_meeting']
+        reason_vaccine = request.form['reason_vaccine']
+        vaccine_reminder = request.form['vaccine_reminder']
+        try :
+            db.execute("INSERT INTO vaccine(date_meeting,name, date_reminder, pet_chip_number) VALUES (?,?,?,?)", (date_meeting,reason_vaccine,vaccine_reminder,chip_number,))
+            db.commit()           
+            return render_template('pet/pet_info.html', list_pet = list_pet, pet_details = pet_details)
+        except db.IntegrityError:
+            flash('Une erreur à eu lieu, veuillez réessayer.')
+            return render_template('pet/new_vaccine.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
+    else:
+        return render_template('pet/new_vaccine.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
 
 
 
