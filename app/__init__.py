@@ -1,7 +1,8 @@
 import os
 from flask import Flask
+from app.config import PASSWORD
 from app.utils import *
-
+from flask_mail import Mail, Message
 # Importation des blueprints de l'application
 # Chaque blueprint contient des routes pour l'application
 from app.views.home import home_bp
@@ -12,12 +13,21 @@ from app.views.pet import pet_bp
 # La fonction retourne une instance de l'application créée
 
 
-
 def create_app():
 
+    
 
     # Crée l'application Flask
     app = Flask(__name__)
+    
+    app.config['MAIL_SERVER'] = "smtp.gmail.com"
+    app.config['MAIL_PORT'] = "465"
+    app.config['MAIL_USERNAME'] = "f23797062@gmail.com"
+    app.config['MAIL_PASSWORD'] = PASSWORD
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
+    
+    mail = Mail(app)
 
     app.config.from_pyfile(os.path.join(os.path.dirname(__file__), "config.py"))
     # Enreigstrement des blueprints de l'application.

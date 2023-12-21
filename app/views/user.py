@@ -11,10 +11,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 @user_bp.route('/profile')
 @login_required
 def show_profile():
-    
     return render_template('user/profile.html')
-
-
 
 @user_bp.route('/profile_update', methods=('GET', 'POST'))
 @login_required

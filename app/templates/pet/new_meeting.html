@@ -13,7 +13,7 @@
             </div>
             {% for pet in list_pet%}
                 {%if pet['chip_number']%}
-                    <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}">
+                    <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}"">
                         <p class="black_text">{{pet['name']}}</p>
                     </a>
                     <p class="black_text">{{pet['chip_number']}}</p>
@@ -46,26 +46,19 @@
             <div class="info_right">
                 <div class="info_new">
                     <div class="title">
-                        <p class="black_text">Ajout d'un vaccin</p>
-                        <a href="{{url_for('pet.new_vaccine')}}">
+                        <p class="black_text">Ajout d'un rendez-vous</p>
+                        <a href="{{url_for('pet.new_meeting')}}">
                             <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
                         </a>
                     </div>
                     <form method="POST">
-                        <label for="date_meeting">Date du vaccin :
+                        <label for="date_meeting">Date du rendez-vous :
                             <input type="date" min="{{min_date}}" name="date_meeting" id="date_meeting">
                         </label>
-                        <input type="text" name="reason_vaccine" id="reason_vaccine" placeholder="Indiquez la raison du vaccin">
-                        <label for="vaccin_reminder">Date du rappel du vaccin :
-                            <input type="date" min="{{min_date}}" name="vaccine_reminder" id="vaccine_reminder">
-                        </label>
-                        <input type="submit" value="Ajouter le vaccin">
+                        <input type="text" name="reason_meeting" id="reason_vaccine" placeholder="Indiquez la raison du rendez-vous">
+                        <input type="submit" value="Ajouter le rendez-vous">
                     </form>
                 </div>
             </div>  
         </div>
-
-    </div>
-    
-
 {% endblock %}

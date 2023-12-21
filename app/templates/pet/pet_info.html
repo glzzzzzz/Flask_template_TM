@@ -43,29 +43,65 @@
                     <input type="submit" value="Valider les changements">
                 </form>
             </div>  
+            
             <div class="info_right">
                 {% if list_vaccine %}
+                <div class="vaccine">
                     <div class="title">
                         <p class="black_text">Vaccins</p>
                         <a href="{{url_for('pet.new_vaccine')}}">
                             <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
-                        </a>
-                        {% for vaccine in list_vaccine%}
-                            <p>{{vaccine['date_meeting']}}</p>
+                        </a> 
+                    </div>     
+                    {% for vaccine in list_vaccine%}
+                        <div class="details">
+                            <a href="{{url_for('pet.delete_vaccine', id_vaccine = vaccine['id_vaccine'] )}}">
+                                <img src="{{url_for('static',filename='trash.png')}}" alt="poubelle">
+                            </a>
                             <p>{{vaccine['name']}}</p>
-                        {% endfor %}
-                    </div>
+                            <p>Effectué le : </p>
+                            <p>{{vaccine['date_meeting']}}</p>
+                            <p>Doit être rappelé le : </p>
+                            <p>{{vaccine['date_reminder']}}</p>
+                        </div> 
+                    {% endfor %}
+                </div> 
                 {% else %}
-                    <div class="title">
-                        <p class="black_text">Ajouter un vaccin</p>
-                        <a href="{{url_for('pet.new_vaccine')}}">
-                            <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
-                        </a>
+                <div class="title">
+                    <p class="black_text">Ajouter un vaccin</p>
+                    <a href="{{url_for('pet.new_vaccine')}}">
+                        <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
+                    </a>
                         
-                    </div>
+                </div>
                 {% endif %}
-
-
+                {% if list_meeting %}
+                <div class="meeting">
+                    <div class="title">
+                        <p class="black_text">Rendez-vous</p>
+                        <a href="{{url_for('pet.new_meeting')}}">
+                            <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
+                        </a> 
+                    </div>     
+                {% for meeting in list_meeting%}
+                    <div class="details">
+                        <a href="{{url_for('pet.delete_meeting', id_meeting = meeting['id_meeting'] )}}">
+                            <img src="{{url_for('static',filename='trash.png')}}" alt="poubelle">
+                        </a>
+                        <p>{{meeting['reason']}}</p>
+                        <p>Effectué le : </p>
+                        <p>{{meeting['date_of_meeting']}}</p>
+                    </div> 
+                {% endfor %}
+                </div> 
+                {% else %}
+                <div class="title">
+                    <p class="black_text">Ajouter un rendez-vous</p>
+                    <a href="{{url_for('pet.new_meeting')}}">
+                        <img src="{{url_for('static', filename='plus.png')}}" alt="Ajout">
+                    </a>
+                </div>
+                {% endif %}
 
             </div>  
         </div>

@@ -6,10 +6,14 @@ import os
 from datetime import *
 import random
 import string
+#email envoyer
+from flask_mail import Mail, Message
+
 
 
 # Création d'un blueprint contenant les routes ayant le préfixe /auth/...
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+
 
 # Route /auth/register
 @auth_bp.route('/register', methods=['GET', 'POST'])
@@ -115,6 +119,31 @@ def logout():
     # On redirige l'utilisateur vers la page principale une fois qu'il s'est déconnecté
     return redirect("/")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @auth_bp.route('/forgot_password', methods = ['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST':
@@ -128,15 +157,49 @@ def forgot_password():
             time = datetime.utcnow() + timedelta(minutes=5)
             #timestamp() -> time en nb float
             db.execute("INSERT INTO token (token, date_expire,id_user_token) values (?,?,?)",(token,time.timestamp(), id_user))
+            #informations du mail
+            
+            msg = Message('Lien de réinitialisation', sender= 'f23797062@gmail.com', recipients=[email])
+            msg.body = f"""
+        
+            {url_for('reset_password', token=token)}
+        
+            """
+            mail.send(msg)
+            flash('après email')
             db.execute("DELETE FROM token WHERE date_expire > ?", (time.timestamp(),))
             db.commit()
             return render_template('auth/reset_password.html')
         except :
             flash("Cet utilisateur n'existe pas.")
-            render_template('auth/forgot_password.html')
+            return render_template('auth/forgot_password.html')
         
     else:
         return render_template('auth/forgot_password.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @auth_bp.route('/reset_password/<token>', methods = ['GET', 'POST'])
 def reset_password(token):

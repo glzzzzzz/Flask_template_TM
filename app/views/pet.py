@@ -27,6 +27,7 @@ def pet_details(chip_number):
     list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
     pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
     list_vaccine = db.execute('SELECT * FROM vaccine WHERE pet_chip_number = ?',(chip_number,)).fetchall()
+    list_meeting = db.execute('SELECT * FROM vet_meeting WHERE pet_chip_number = ?',(chip_number,)).fetchall()
     if request.method == 'POST':
         user_id = session['user_id']
         new_name = request.form['name_pet']
@@ -56,7 +57,7 @@ def pet_details(chip_number):
         pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
         
     db.close()
-    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine)
+    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine, list_meeting = list_meeting)
 
 @pet_bp.route('/mesanimaux/nouvel_animal', methods=['GET','POST'])
 def new_pet():
@@ -96,17 +97,52 @@ def new_vaccine():
         try :
             db.execute("INSERT INTO vaccine(date_meeting,name, date_reminder, pet_chip_number) VALUES (?,?,?,?)", (date_meeting,reason_vaccine,vaccine_reminder,chip_number,))
             db.commit()           
-            return render_template('pet/pet_info.html', list_pet = list_pet, pet_details = pet_details)
+            return redirect(url_for('pet.pet_details', chip_number = chip_number))
         except db.IntegrityError:
             flash('Une erreur à eu lieu, veuillez réessayer.')
             return render_template('pet/new_vaccine.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
     else:
         return render_template('pet/new_vaccine.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
+    
+@pet_bp.route('/mesanimaux/nouveau_rendez_vous', methods = ['GET', 'POST'])
+def new_meeting():
+    db = get_db()
+    chip_number = session['chip_number']
+    today_date = datetime.now()
+    min_date = today_date.strftime('%Y-%m-%d')
+    list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+    pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+    if request.method =='POST':
+        date_meeting = request.form['date_meeting']
+        reason_meeting = request.form['reason_meeting']
+        try :
+            db.execute("INSERT INTO vet_meeting(reason, date_of_meeting, pet_chip_number) VALUES (?,?,?)", (reason_meeting,date_meeting,chip_number,))
+            db.commit()           
+            return redirect(url_for('pet.pet_details', chip_number = chip_number))
+        except db.IntegrityError:
+            flash('Une erreur à eu lieu, veuillez réessayer.')
+            return render_template('pet/new_meeting.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
+    else:
+        return render_template('pet/new_meeting.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
 
 
+@pet_bp.route('/mesanimaux/supprimer_rendez_vous/<id_meeting>')
+def delete_meeting(id_meeting):
+    db = get_db()
+    chip_number = session['chip_number']
+    db.execute('DELETE FROM vet_meeting WHERE id_meeting = ?',(id_meeting,))
+    db.commit()
+    
+    return redirect(url_for('pet.pet_details', chip_number = chip_number))
 
-
-
+@pet_bp.route('/mesanimaux/supprimer_vaccin/<id_vaccine>')
+def delete_vaccine(id_vaccine):
+    db = get_db()
+    chip_number = session['chip_number']
+    db.execute('DELETE FROM vaccine WHERE id_vaccine = ?',(id_vaccine,))
+    db.commit()
+    
+    return redirect(url_for('pet.pet_details', chip_number = chip_number))
 
 
 
