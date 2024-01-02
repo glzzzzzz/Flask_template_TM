@@ -20,13 +20,7 @@ def create_app():
     # Crée l'application Flask
     app = Flask(__name__)
     
-    app.config['MAIL_SERVER'] = "smtp.gmail.com"
-    app.config['MAIL_PORT'] = "465"
-    app.config['MAIL_USERNAME'] = "f23797062@gmail.com"
-    app.config['MAIL_PASSWORD'] = PASSWORD
-    app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USE_SSL'] = False
-    
+   
     mail = Mail(app)
 
     app.config.from_pyfile(os.path.join(os.path.dirname(__file__), "config.py"))
