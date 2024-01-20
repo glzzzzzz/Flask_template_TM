@@ -14,7 +14,7 @@
 
 {% block content %}
   <div class="info_box">
-    <form method="POST" action="{{url_for('user.update_profile')}}">
+    <form method="POST" action="{{url_for('user.update_profile')}}" enctype="multipart/form-data">
       <div class="name_and_first_name">
         <div class="first_name_column">
           <p>Prénom</p>
@@ -25,6 +25,9 @@
           <input type="text" name="name" id="name" class="gray_font" value="{{g.user.name}}">
         </div>
       </div>
+      <br>
+      <input  name="profilePic" type="file" accept="image/*" capture>
+      <br>
       <p>E-mail</p>
       <input type="email" name="email" id="email" class="gray_font" value="{{g.user.email}}">
       <br>

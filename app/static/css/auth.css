@@ -157,7 +157,6 @@ body{
 
 .info_box input{
     display: flex;
-    align-items: center;
     border-radius: 5px;
     width: 290px;
     height: 50px;

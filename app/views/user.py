@@ -1,7 +1,11 @@
-from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
+from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for, send_from_directory)
+import uuid
+import os
+
 from app.utils import *
 from app.db.db import get_db
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utlis import secure_filename
 
 # Routes /user/...
 user_bp = Blueprint('user', __name__, url_prefix='/user')
@@ -12,6 +16,9 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 @login_required
 def show_profile():
     return render_template('user/profile.html')
+
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
 
 @user_bp.route('/profile_update', methods=('GET', 'POST'))
 @login_required
@@ -29,6 +36,21 @@ def update_profile():
         new_phone_number = request.form['phone_number']
         new_password = request.form['password']
         new_verify_password = request.form['verify_password']
+        
+        
+        
+        
+        if profil_picture :
+            try:
+                
+                db.execute("UPDATE user SET profil_pic = ? WHERE id_user = ?", (pic_name, user_id,))
+                db.commit()
+                
+            except db.IntegrityError:
+
+                    error = f"Une erreur a eu lieu, veuillez réessayer !"
+                    flash(error)
+                    return render_template('user/profile.html')
         
         if new_first_name != user['first_name'] :
             try:
@@ -74,7 +96,7 @@ def update_profile():
                     error = f"Une erreur a eu lieu, veuillez réessayer !"
                     flash(error)
                     return render_template('user/profile.html')
-        if new_password == new_verify_password and len(new_password)>= 8:
+        if new_password != user['password'] and new_password == new_verify_password and len(new_password)>= 8 :
             if not check_password_hash(user['password'], new_password):
                 try:
                     db.execute("UPDATE user SET password = ? WHERE id_user = ?",(generate_password_hash(new_password),user_id))
@@ -84,8 +106,6 @@ def update_profile():
                     error = f"Une erreur a eu lieu, veuillez réessayer !"
                     flash(error)
                     return render_template('user/profile.html')
-            else:
-                flash('Votre nouveau mot de passe ne doit pas être identique avec le précédent')
         else:
             error = f"Veuillez entrer des mots de passe identiques avec un minimum de 8 charactères !"
             flash(error)
@@ -93,7 +113,6 @@ def update_profile():
         
         db = get_db()
         g.user = db.execute('SELECT * FROM user WHERE id_user = ?', (user_id,)).fetchone()
-        flash(user['password'])
 
         return render_template('user/profile.html')
 

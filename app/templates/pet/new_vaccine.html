@@ -13,10 +13,14 @@
             </div>
             {% for pet in list_pet%}
                 {%if pet['chip_number']%}
-                    <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number']) }}">
+                <div class="pet_title">
+                    <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number'])}}">
                         <p class="black_text">{{pet['name']}}</p>
                     </a>
-                    <p class="black_text">{{pet['chip_number']}}</p>
+                    <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number'])}}">
+                        <p class="black_text">{{pet['chip_number']}}</p>
+                    </a>
+                </div>
                 {% else %}
                     <p>Vous n'avez pas d'animaux enregistrés</p>
                 {% endif %}
