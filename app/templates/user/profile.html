@@ -3,11 +3,15 @@
 {% block header %}
   <div class="top_info">
     <div class="picture">
+      {% if g.user.profil_pic %}
+      <img src="{{url_for('static', filename='image_uploads/' + g.user.profil_pic )}}">
+      {% else %}
       <img src="{{url_for('static', filename='camera.png')}}" id="camera">
+      {% endif %}
     </div>
     <div class="top_content">
       <h2 class="black_font">{% block title %}Mon compte{% endblock %}</h2>
-      <p class="gray_font">Ajouter une photo de profil</p>
+    
     </div> 
   </div>
 {% endblock %}
@@ -26,6 +30,7 @@
         </div>
       </div>
       <br>
+      <p class="gray_font">Ajouter une photo de profile</p>
       <input  name="profilePic" type="file" accept="image/*" capture>
       <br>
       <p>E-mail</p>

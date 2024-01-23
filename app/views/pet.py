@@ -76,7 +76,7 @@ def new_pet():
             flash('Vous avez ajouté un nouvel animal.')
             return redirect(url_for('pet.home_pet', list_pet = list_pet))
         except db.IntegrityError:
-            flash('Une erreur à eu lieu, veuillez réessayer.')
+            flash('Une erreur a eu lieu, veuillez réessayer.')
             return render_template('pet/add_new_pet.html', list_pet = list_pet)
         
     else:

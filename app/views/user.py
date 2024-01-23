@@ -5,7 +5,7 @@ import os
 from app.utils import *
 from app.db.db import get_db
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.utlis import secure_filename
+from werkzeug.utils import secure_filename
 
 # Routes /user/...
 user_bp = Blueprint('user', __name__, url_prefix='/user')
@@ -17,8 +17,9 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 def show_profile():
     return render_template('user/profile.html')
 
-photos = UploadSet('photos', IMAGES)
-configure_uploads(app, photos)
+
+UPLOAD_FOLDER = 'app/static/image_uploads/'
+
 
 @user_bp.route('/profile_update', methods=('GET', 'POST'))
 @login_required
@@ -36,21 +37,25 @@ def update_profile():
         new_phone_number = request.form['phone_number']
         new_password = request.form['password']
         new_verify_password = request.form['verify_password']
+        profil_pic = request.files['profilePic']
+    
+        pic_filename = secure_filename(profil_pic.filename)
+        #set uuid
+        pic_name = str(uuid.uuid1()) + "_" + pic_filename
+        #save image
+        profil_pic.save(os.path.join(UPLOAD_FOLDER, pic_name))
+        profil_pic = pic_name
         
         
-        
-        
-        if profil_picture :
+        if profil_pic : 
             try:
-                
-                db.execute("UPDATE user SET profil_pic = ? WHERE id_user = ?", (pic_name, user_id,))
+                db.execute("UPDATE user SET profil_pic = ? WHERE id_user = ?",(profil_pic, user_id,))
                 db.commit()
-                
             except db.IntegrityError:
 
-                    error = f"Une erreur a eu lieu, veuillez réessayer !"
-                    flash(error)
-                    return render_template('user/profile.html')
+                error = f"Une erreur a eu lieu, veuillez réessayer !"
+                flash(error)
+                return render_template('user/profile.html')
         
         if new_first_name != user['first_name'] :
             try:
@@ -58,10 +63,9 @@ def update_profile():
                 db.commit()
                 
             except db.IntegrityError:
-
-                    error = f"Une erreur a eu lieu, veuillez réessayer !"
-                    flash(error)
-                    return render_template('user/profile.html')
+                error = f"Une erreur a eu lieu, veuillez réessayer !"
+                flash(error)
+                return render_template('user/profile.html')
         
         if new_name != user['name'] :
             try:
@@ -70,10 +74,9 @@ def update_profile():
                 flash("La modification a été effectuée !")
                 
             except db.IntegrityError:
-
-                    error = f"Une erreur a eu lieu, veuillez réessayer !"
-                    flash(error)
-                    return render_template('user/profile.html')
+                error = f"Une erreur a eu lieu, veuillez réessayer !"
+                flash(error)
+                return render_template('user/profile.html')
         
         if new_email != user['email'] :
             try:
@@ -81,10 +84,9 @@ def update_profile():
                 db.commit()
                 
             except db.IntegrityError:
-
-                    error = f"Une erreur a eu lieu, veuillez réessayer !"
-                    flash(error)
-                    return render_template('user/profile.html')
+                error = f"Une erreur a eu lieu, veuillez réessayer !"
+                flash(error)
+                return render_template('user/profile.html')
         
         if new_phone_number != user['phone_number'] :
             try:
@@ -106,10 +108,7 @@ def update_profile():
                     error = f"Une erreur a eu lieu, veuillez réessayer !"
                     flash(error)
                     return render_template('user/profile.html')
-        else:
-            error = f"Veuillez entrer des mots de passe identiques avec un minimum de 8 charactères !"
-            flash(error)
-            return render_template('user/profile.html')
+        
         
         db = get_db()
         g.user = db.execute('SELECT * FROM user WHERE id_user = ?', (user_id,)).fetchone()

@@ -191,13 +191,11 @@ body{
     
 
 
-.picture{
-    height: 35px;
-    width: 35px;
+.picture img{
+    height: auto;
+    width: 50px;
     background-color: #edf0ee;
     border-radius: 50%;
-    padding: 10px;
-
 }
 
 .info_box #update{
