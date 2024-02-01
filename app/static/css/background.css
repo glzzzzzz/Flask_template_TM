@@ -45,9 +45,17 @@ body{
 
 .navbar a.active{
     color:#4948FF;
-    
 }
 
+.navbar #logout:hover::after{
+    content: "TEST logout";
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    color: black;
+    padding-top: 5px;
+
+}
 .blue_font{
     font-family: 'Inter', sans-serif;
     color: #4948FF;

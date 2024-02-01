@@ -39,15 +39,15 @@ def update_profile():
         new_verify_password = request.form['verify_password']
         profil_pic = request.files['profilePic']
     
-        pic_filename = secure_filename(profil_pic.filename)
-        #set uuid
-        pic_name = str(uuid.uuid1()) + "_" + pic_filename
-        #save image
-        profil_pic.save(os.path.join(UPLOAD_FOLDER, pic_name))
-        profil_pic = pic_name
         
         
         if profil_pic : 
+            pic_filename = secure_filename(profil_pic.filename)
+            #set uuid
+            pic_name = str(uuid.uuid1()) + "_" + pic_filename
+            #save image
+            profil_pic.save(os.path.join(UPLOAD_FOLDER, pic_name))
+            profil_pic = pic_name
             try:
                 db.execute("UPDATE user SET profil_pic = ? WHERE id_user = ?",(profil_pic, user_id,))
                 db.commit()
