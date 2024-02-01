@@ -218,13 +218,13 @@ def dog_bee():
                 return render_template('pet/dog_bee.html', dog_bee=None)
             
             if race =="nordics_races_1":
-                race == 0.8
+                race = 0.8
             elif race =="races_2":
-                race == 0.9
+                race = 0.9
             elif race=="other_3":
-                race == 1 
+                race = 1 
             elif race == "races_4":
-                race == 1.1
+                race = 1.1
             else:
                 flash("Veuillez selectionner un groupe de races pour votre chien !")
                 return render_template('pet/dog_bee.html', dog_bee=None)
