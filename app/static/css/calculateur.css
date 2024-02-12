@@ -189,7 +189,7 @@
 
 .info_right{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 25vw;
     justify-content: space-around;
 }
@@ -207,6 +207,10 @@
     font-size: 10px;
 }
 
+.row{
+    display: flex;
+    flex-direction: row;
+}
 .vaccine{
     display: flex;
     flex-direction: column;

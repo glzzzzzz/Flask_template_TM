@@ -24,6 +24,12 @@ def pet_details(chip_number):
     session.pop('chip_number', None)
     session['chip_number'] = chip_number
     
+    list_weight = db.execute('SELECT * FROM weights WHERE pet_chip_number = ?',(chip_number,)).fetchall()
+    
+    labels = [weight['date_weight'] for weight in list_weight]
+
+    values = [weight['weight'] for weight in list_weight]
+
     list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
     pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
     list_vaccine = db.execute('SELECT * FROM vaccine WHERE pet_chip_number = ?',(chip_number,)).fetchall()
@@ -51,13 +57,12 @@ def pet_details(chip_number):
         except db.IntegrityError:
                 error = f"Une erreur a eu lieu, veuillez réessayer !"
                 flash(error)
-                return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine)
+                return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine, list_meeting = list_meeting, list_weight = list_weight)
         
         list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
         pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
         
-    db.close()
-    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine, list_meeting = list_meeting)
+    return render_template('pet/pet_info.html', pet_details=pet_details, list_pet = list_pet, list_vaccine = list_vaccine, list_meeting = list_meeting, list_weight = list_weight, labels = labels, values = values)
 
 @pet_bp.route('/mesanimaux/nouvel_animal', methods=['GET','POST'])
 def new_pet():
@@ -124,7 +129,25 @@ def new_meeting():
             return render_template('pet/new_meeting.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
     else:
         return render_template('pet/new_meeting.html', list_pet = list_pet, pet_details = pet_details, min_date = min_date)
-
+@pet_bp.route('/mesanimaux/nouvelle_mesure', methods = ['GET', 'POST'])
+def new_weight():
+    db = get_db()
+    chip_number = session['chip_number']
+    list_pet = db.execute('SELECT * FROM pet WHERE owner_id = ?',(g.user['id_user'],)).fetchall()
+    pet_details = db.execute('SELECT * FROM pet WHERE chip_number = ?',(chip_number,)).fetchone()
+    if request.method == 'POST':
+        date_meeting = request.form['date_meeting']
+        weight = request.form['weight']
+        try:
+            db.execute("INSERT INTO weights(weight, date_weight, pet_chip_number) VALUES (?,?,?)", (weight, date_meeting, chip_number,))
+            db.commit()
+            return redirect(url_for('pet.pet_details', chip_number = chip_number))
+        except db.IntegrityError:
+            flash('Une erreur a eu lieu, veuillez réessayer.')
+            return render_template('pet/new_weight.html', list_pet = list_pet, pet_details = pet_details)
+    else: 
+        return render_template('pet/new_weight.html', list_pet = list_pet, pet_details = pet_details)
+    
 
 @pet_bp.route('/mesanimaux/supprimer_rendez_vous/<id_meeting>')
 def delete_meeting(id_meeting):
