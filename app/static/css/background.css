@@ -32,30 +32,35 @@ body{
     right: 0;
     left: auto;
 }
-.navbar a{
+.navbar li{
     float: left;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     text-align: center;
-    text-decoration: none;
+    list-style: none;
     padding: 14px 16px;
     color: black;
-    top
+}
+.navbar a{
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown{
+    opacity: 0;
+    visibility: hidden;
+
+}
+li:hover ul.dropdown{
+    opacity: 1;
+    visibility: visible;
 }
 
 .navbar a.active{
     color:#4948FF;
 }
 
-.navbar #logout:hover::after{
-    content: "TEST logout";
-    display:flex;
-    justify-content: center;
-    flex-direction: column;
-    color: black;
-    padding-top: 5px;
 
-}
 .blue_font{
     font-family: 'Inter', sans-serif;
     color: #4948FF;

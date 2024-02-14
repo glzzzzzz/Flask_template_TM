@@ -7,11 +7,15 @@
 
 <body>
     <div class="navbar">
-        <a href={{url_for('home.landing_page')}}>Accueil</a>
-        <a href={{url_for('pet.home_pet')}}>Mes animaux</a>
-        <a href={{url_for('home.apropos')}}>À propos</a>
-        <a href={{url_for('home.calculateur')}}>Calculateur de ration</a>
-        <a href={{url_for('user.show_profile')}}>Mon compte</a>
+        <li><a href="{{url_for('home.landing_page')}}">Accueil</a></li>
+        <li><a href="{{url_for('pet.home_pet')}}">Mes animaux</a></li>
+        <li><a href="{{url_for('home.apropos')}}">À propos</a></li>
+        <li><a href="{{url_for('home.calculateur')}}">Calculateur de ration</a></li>
+        <li><a href="{{url_for('user.show_profile')}}" id="logout">Mon compte</a>
+            <ul class="dropdown">
+                <li><a href="{{url_for('auth.logout')}}">Me déconnecter</a></li>
+            </ul>
+        </li>
     </div>
 
     <section class="content">
