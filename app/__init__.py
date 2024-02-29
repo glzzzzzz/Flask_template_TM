@@ -1,8 +1,8 @@
 import os
 from flask import Flask
-from app.config import PASSWORD
+from app.config import MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USERNAME, MAIL_USE_TLS, MAIL_USE_SSL
 from app.utils import *
-from flask_mail import Mail, Message
+from flask_mailman import Mail
 # Importation des blueprints de l'application
 # Chaque blueprint contient des routes pour l'application
 from app.views.home import home_bp
@@ -12,6 +12,7 @@ from app.views.pet import pet_bp
 # Fonction automatiquement appelée par le framework Flask lors de l'exécution de la commande python -m flask run permettant de lancer le projet
 # La fonction retourne une instance de l'application créée
 
+mail = Mail()
 
 def create_app():
 
@@ -20,8 +21,12 @@ def create_app():
     # Crée l'application Flask
     app = Flask(__name__)
     
-   
-    mail = Mail(app)
+    app.config['MAIL_SERVER'] = MAIL_SERVER
+    app.config['MAIL_PORT'] = MAIL_PORT
+    app.config['MAIL_USERNAME'] = MAIL_USERNAME
+    app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
+    app.config['MAIL_USE_TLS'] = MAIL_USE_TLS
+    app.config['MAIL_USE_SSL'] = MAIL_USE_SSL
 
     app.config.from_pyfile(os.path.join(os.path.dirname(__file__), "config.py"))
     # Enreigstrement des blueprints de l'application.

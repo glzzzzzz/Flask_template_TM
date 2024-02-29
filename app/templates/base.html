@@ -1,9 +1,10 @@
 <!doctype html>
 <head>
     <title>{% block title %}{% endblock %} petcare.com</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
-</head>
+    
 
 <body>
     <div class="cercle_degrade"></div>
@@ -13,9 +14,11 @@
         <li><a href="{{url_for('home.apropos')}}">À propos</a></li>
         <li><a href="{{url_for('home.calculateur')}}">Calculateur de ration</a></li>
         <li><a href="{{url_for('user.show_profile')}}" id="logout">Mon compte</a>
+            {% if g.user %}
             <ul class="dropdown">
                 <li><a href="{{url_for('auth.logout')}}">Me déconnecter</a></li>
             </ul>
+            {% endif %}
         </li>
     </div>
 

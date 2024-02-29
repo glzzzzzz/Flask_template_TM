@@ -31,13 +31,16 @@
 }
 .black_text{
     font-family: 'Inter', sans-serif;
+    font-weight: bold;
     color: black;
     font-size: 13px;
     text-align: center;
 }
 
+
 .blue_text{
     font-family: 'Inter', sans-serif;
+    font-weight: bold;
     color: #4948FF;
     font-size: 13px;
     text-align: center;
@@ -85,6 +88,7 @@
     max-width: 30px;
     padding: 10px;
     font-family: 'Inter', sans-serif;
+    font-weight: bold;
     font-size: 15px;
 
 }
@@ -103,6 +107,7 @@
     color: gray;
     font-size: 14px;
     font-family: 'Inter', sans-serif;
+    font-weight: bold;
     margin-left: 2%;
     white-space: nowrap;
 }
@@ -177,6 +182,7 @@
     width: fit-content;
     padding: 8px;
     font-family: 'Inter', sans-serif;
+    font-weight: bold;
     font-size: 10px;
 }
 .info_left input[type='submit']{
@@ -259,6 +265,7 @@
     font-size: 10px;
     color: gray;
     font-family: 'Inter', sans-serif;
+    font-weight: bold;
     text-align: center;
     
 }

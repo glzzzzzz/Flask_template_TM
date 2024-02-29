@@ -2,12 +2,18 @@ from flask import (Blueprint, flash, g, redirect, render_template, request, sess
 from itsdangerous import URLSafeTimedSerializer as Serializer
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.db.db import get_db
+from app.config import MAIL_PASSWORD, MAIL_SERVER, MAIL_PORT,MAIL_USE_SSL, MAIL_USE_TLS, MAIL_USERNAME
 import os
 from datetime import *
 import random
 import string
 #email envoyer
-from flask_mail import Mail, Message
+import smtplib, ssl
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from app.mail_reset.message import reset_message
+from app.mail_reset.send_mail import send_mail
+
 
 
 
@@ -74,6 +80,8 @@ def register():
 # Route /auth/login
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    
+    connected = 0
     # Si des données de formulaire sont envoyées vers la route /login (ce qui est le cas lorsque le formulaire de login est envoyé)
     if request.method == 'POST':
 
@@ -122,33 +130,15 @@ def logout():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @auth_bp.route('/forgot_password', methods = ['GET', 'POST'])
 def forgot_password():
+    
     if request.method == 'POST':
         email = request.form['email']
         db = get_db()
+        
+       
+              
         try :
             id_user = db.execute("SELECT id_user FROM user WHERE email = ?",(email,)).fetchone()[0]
             db.execute("DELETE FROM token WHERE id_user_token = ?",(id_user,))
@@ -157,43 +147,22 @@ def forgot_password():
             time = datetime.utcnow() + timedelta(minutes=5)
             #timestamp() -> time en nb float
             db.execute("INSERT INTO token (token, date_expire,id_user_token) values (?,?,?)",(token,time.timestamp(), id_user))
-            #informations du mail
-            
-            msg = Message('Lien de réinitialisation', sender= 'f23797062@gmail.com', recipients=[email])
-            msg.body = f"""
-        
-            {url_for('reset_password', token=token)}
-        
-            """
-            mail.send(msg)
-            flash('après email')
             db.execute("DELETE FROM token WHERE date_expire > ?", (time.timestamp(),))
             db.commit()
-            return render_template('auth/reset_password.html')
+            
+            if send_mail(email, reset_message(token),'TEST') == "erreur":
+                flash("Il y a eu une erreur")
+                return render_template('auth/forgot_password.html')
+            flash('Mail envoyé')
+            return render_template('auth/forgot_password.html')
+            
         except :
             flash("Cet utilisateur n'existe pas.")
             return render_template('auth/forgot_password.html')
         
+        
     else:
         return render_template('auth/forgot_password.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
