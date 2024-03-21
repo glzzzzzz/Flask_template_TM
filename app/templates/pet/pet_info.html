@@ -20,6 +20,9 @@
                     <a href="{{url_for('pet.pet_details', chip_number=pet['chip_number'])}}">
                         <p class="black_text">{{pet['chip_number']}}</p>
                     </a>
+                    <a href="{{url_for('pet.del_pet', chip_number=pet['chip_number'])}}">
+                        <img src="{{url_for('static', filename='trash.png')}}" alt="poubelle">
+                    </a>
                 </div>
                 {% else %}
                     <p>Vous n'avez pas d'animaux enregistrés</p>
@@ -74,7 +77,7 @@
                                         datasets : [
                                         {
                                             label : "Evolution de poids",
-                                            data: {{ values | safe}},
+                                            data : {{values | safe}},
                                             fill : false,
                                             borderColor: "rgb(75, 192, 192)",
                                             lineTension: 0.1

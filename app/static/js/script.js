@@ -16,6 +16,7 @@ for (var i=0 ; i<nav_links.length;i++) {
 
 
 let eyeicon = document.getElementById("eyeicon");
+let eyeicon2 = document.getElementById("eyeicon2");
 let password = document.getElementById("password");
 let verify_password = document.getElementById("verify_password");
 

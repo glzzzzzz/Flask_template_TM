@@ -87,6 +87,16 @@ def new_pet():
     else:
         return render_template('pet/add_new_pet.html', list_pet = list_pet)
 
+@pet_bp.route('/mesanimaux/suppression/<chip_number>', methods=['GET', 'POST'])
+def del_pet(chip_number):
+    db = get_db()
+    db.execute('DELETE FROM pet WHERE chip_number = ?',(chip_number,))
+    db.commit()
+    
+    return redirect(url_for('pet.home_pet', chip_number = chip_number))
+
+
+
 @pet_bp.route('/mesanimaux/nouveau_vaccin', methods = ['GET', 'POST'])
 def new_vaccine():
     db = get_db()
