@@ -14,7 +14,7 @@
         <li><a href="{{url_for('home.apropos')}}">À propos</a></li>
         <li><a href="{{url_for('home.calculateur')}}">Calculateur de ration</a></li>
         <li><a href="{{url_for('user.show_profile')}}" id="logout">Mon compte</a>
-            {% if connected %}
+            {% if g.user %}
             <ul class="dropdown">
                 <li><a href="{{url_for('auth.logout')}}">Me déconnecter</a></li>
             </ul>

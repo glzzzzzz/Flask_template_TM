@@ -24,14 +24,28 @@ body{
     color: black;
 }
 
+.navbar a.active{
+    color:#4948FF;
+}
+
+
 .dropdown{
     opacity: 0;
-    visibility: hidden;
-
+    visibility: hidden; 
 }
+
+.dropdown a{
+    font-size: 10px;
+    position: absolute;
+    right: 25px;
+    
+}
+
+
 li:hover ul.dropdown{
     opacity: 1;
     visibility: visible;
+
 }
 
 p{
