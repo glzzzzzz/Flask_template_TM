@@ -60,7 +60,7 @@ def register():
 
                     # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
                     # dans le but de l'afficher ultérieurement, généralement sur la page suivante après une redirection
-                    error = f"User {name+email+password} is already registered."
+                    error = f"User {name+email} is already registered."
                     flash(error)
                     return redirect(url_for("auth.register"))
             
