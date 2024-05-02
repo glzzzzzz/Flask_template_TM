@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from app.config import MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USERNAME, MAIL_USE_TLS, MAIL_USE_SSL
+#from app.config import MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USERNAME, MAIL_USE_TLS, MAIL_USE_SSL
 from app.utils import *
 from flask_mailman import Mail
 # Importation des blueprints de l'application
@@ -21,13 +21,13 @@ def create_app():
     # Crée l'application Flask
     app = Flask(__name__)
     
-    app.config['MAIL_SERVER'] = MAIL_SERVER
-    app.config['MAIL_PORT'] = MAIL_PORT
-    app.config['MAIL_USERNAME'] = MAIL_USERNAME
-    app.config['MAIL_PASSWORD'] = MAIL_PASSWORD
-    app.config['MAIL_USE_TLS'] = MAIL_USE_TLS
-    app.config['MAIL_USE_SSL'] = MAIL_USE_SSL
-
+    app.config['MAIL_SERVER'] = os.environ.get(MAIL_SERVER)
+    app.config['MAIL_PORT'] = os.environ.get(MAIL_PORT)
+    app.config['MAIL_USERNAME'] = os.environ.get(MAIL_USERNAME)
+    app.config['MAIL_PASSWORD'] = os.environ.get(MAIL_PASSWORD)
+    app.config['MAIL_USE_TLS'] = os.environ.get(MAIL_USE_TLS)
+    app.config['MAIL_USE_SSL'] = os.environ.get(MAIL_USE_SSL)
+    
     app.config.from_pyfile(os.path.join(os.path.dirname(__file__), "config.py"))
     # Enreigstrement des blueprints de l'application.
     app.register_blueprint(home_bp)
