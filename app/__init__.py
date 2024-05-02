@@ -21,12 +21,14 @@ def create_app():
     # Crée l'application Flask
     app = Flask(__name__)
     
+    port = int(os.environ.get("PORT", 8000))
+    
     app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
-    app.config['MAIL_PORT'] = os.environ.get(MAIL_PORT)
-    app.config['MAIL_USERNAME'] = os.environ.get(MAIL_USERNAME)
-    app.config['MAIL_PASSWORD'] = os.environ.get(MAIL_PASSWORD)
-    app.config['MAIL_USE_TLS'] = os.environ.get(MAIL_USE_TLS)
-    app.config['MAIL_USE_SSL'] = os.environ.get(MAIL_USE_SSL)
+    app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+    app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS')
+    app.config['MAIL_USE_SSL'] = os.environ.get('MAIL_USE_SSL')
     
     app.config.from_pyfile(os.path.join(os.path.dirname(__file__), "config.py"))
     # Enreigstrement des blueprints de l'application.
