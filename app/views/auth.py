@@ -2,7 +2,7 @@ from flask import (Blueprint, flash, g, redirect, render_template, request, sess
 from itsdangerous import URLSafeTimedSerializer as Serializer
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.db.db import get_db
-from app.config import MAIL_PASSWORD, MAIL_SERVER, MAIL_PORT,MAIL_USE_SSL, MAIL_USE_TLS, MAIL_USERNAME
+#from app.config import MAIL_PASSWORD, MAIL_SERVER, MAIL_PORT,MAIL_USE_SSL, MAIL_USE_TLS, MAIL_USERNAME
 import os
 from datetime import *
 import random
