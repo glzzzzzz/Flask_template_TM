@@ -21,7 +21,7 @@ def create_app():
     # Crée l'application Flask
     app = Flask(__name__)
     
-    port = int(os.environ.get("PORT", 8000))
+    app.config['PORT'] = int(os.environ.get("PORT", 8000))
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     #app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
     #app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
