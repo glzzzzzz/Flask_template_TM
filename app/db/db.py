@@ -1,7 +1,7 @@
 import sqlite3
 import os
 from flask import current_app, g
-from app.config import DATABASE
+#from app.config import DATABASE
 
 def get_db():
     # L'objet g est un objet créé par le framework Flask à chaque requête.
