@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from app.config import MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USERNAME, MAIL_USE_TLS, MAIL_USE_SSL, SECRET_KEY
+#from app.config import MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USERNAME, MAIL_USE_TLS, MAIL_USE_SSL, SECRET_KEY
 from app.utils import *
 from flask_mailman import Mail
 # Importation des blueprints de l'application
