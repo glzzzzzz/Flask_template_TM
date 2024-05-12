@@ -245,7 +245,7 @@ def dog_bee():
                 physical_activity = 1.1
             elif physical_activity == "very_active":
                 physical_activity = 1.2
-                flash(physical_activity)
+                
             else:
                 flash("Veuillez selectionner une situation physique pour votre chien !")
                 return render_template('pet/dog_bee.html', dog_bee=None)
